@@ -1,0 +1,104 @@
+exports.handler = async (event) => {
+    console.log(event);
+    const testNumber = '+9181112222'
+    // Remove the + From the beginning and conver to array
+    const number = Array.from(testNumber);
+    number.shift()
+    
+    let newNumber;
+    let possibilities = [];
+    // Iterate through each number generating the possible combinations
+    for(let i = 0; i < number.length; i++) {
+        if ( i === 0 ) {
+            possibilities = holdme(number[i])
+        } else {
+            let tempLetterHolder = holdme(number[i]);
+            for (let l = 0; l < tempLetterHolder.length; l++) {
+                for(let j = 0; j < possibilities.length; j++) {
+                    possibilities.splice(l, 0, possibilities[l])
+                }
+            }
+        }
+        
+    }
+    
+    // let nums = [];
+    // let counter = 0;
+    // for(let i = 0; i < possibilities.length; i++) {
+    //     for(let j = 0; j < possibilities[i].length; j++) {
+    //         nums[counter] = possibilities[i][j];
+    //         counter++;
+    //     }
+    // }
+    
+    
+    
+    // let moreCase = []
+    // for(let i = 0; i < number.length; i++) {
+    //     for(let j = 0; j < possibilities[i].length; j++) {
+    //         moreCase.push(possibilities[i][j]);
+    //     }
+    // }
+    
+    const response = {
+        statusCode: 200,
+        body: possibilities,
+    };
+    return response;
+};
+
+function holdme(value) {
+    let array = []
+            switch (value) {
+            case '0':
+                array.push('0');
+                break;
+            case '1':
+                array.push('1');
+                break;
+            case '2':
+                array.push('A');
+                array.push('B');
+                array.push('C'); 
+                break;
+            case '3':
+                array.push('D');
+                array.push('E');
+                array.push('F');
+                break;
+            case '4':
+                array.push('G');
+                array.push('H');
+                array.push('I');
+                break;
+            case '5':
+                array.push('J');
+                array.push('K');
+                array.push('L');
+                break;
+            case '6':
+                array.push('M');
+                array.push('N');
+                array.push('O');
+                break;
+            case '7':
+                array.push('P');
+                array.push('Q');
+                array.push('R');
+                array.push('S');
+                break;
+            case '8':
+                array.push('T');
+                array.push('U');
+                array.push('V');
+                break;
+            case '9':
+                array.push('W');
+                array.push('X');
+                array.push('Y');
+                array.push('Z');
+                break;
+        }
+        
+    return array;
+}
